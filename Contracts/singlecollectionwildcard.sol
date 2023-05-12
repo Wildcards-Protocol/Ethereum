@@ -887,10 +887,10 @@ contract NFT_Collection_Resolver is
     TextResolver,
     ReverseClaimer
 {
-    ENS immutable ens;
-    INameWrapper immutable nameWrapper;
-    address immutable trustedETHController;
-    address immutable trustedReverseRegistrar;
+    ENS immutable ens = ENS(<//ENS Registry contract addr>);
+    INameWrapper immutable nameWrapper = INameWrapper(<//Namewrapper contract addr>);
+    address immutable trustedETHController = <//.eth Registrar Controller>;
+    address immutable trustedReverseRegistrar = <//Reverse Registrar>;
     address public tokenContract;
 
     mapping(address => mapping(address => bool)) private _operatorApprovals;
@@ -911,17 +911,7 @@ contract NFT_Collection_Resolver is
         bool indexed approved
     );
 
-    constructor(
-        ENS _ens,
-        INameWrapper wrapperAddress,
-        address _trustedETHController,
-        address _trustedReverseRegistrar,
-        address _nft
-    ) ReverseClaimer(_ens, msg.sender) {
-        ens = _ens;
-        nameWrapper = wrapperAddress;
-        trustedETHController = _trustedETHController;
-        trustedReverseRegistrar = _trustedReverseRegistrar;
+    constructor( address _nft) ReverseClaimer(ens, msg.sender) {
         tokenContract = _nft;
     }
 
