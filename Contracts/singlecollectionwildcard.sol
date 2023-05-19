@@ -1043,6 +1043,20 @@ contract NFT_Collection_Resolver is
         }
         return result;
     }
+    
+    function toString(address _addr) public pure returns (string memory) {
+        bytes32 value = bytes32(uint256(uint160(_addr)));
+        bytes memory alphabet = "0123456789abcdef";
+
+        bytes memory str = new bytes(42);
+        str[0] = '0';
+        str[1] = 'x';
+        for (uint i = 0; i < 20; i++) {
+            str[2+i*2] = alphabet[uint8(uint8(value[i + 12] >> 4))];
+            str[3+i*2] = alphabet[uint8(uint8(value[i + 12]) & 0xf)];
+        }
+        return string(str);
+    }
 
 
     function resolve(bytes calldata name, bytes calldata data) public view returns(bytes memory) {
@@ -1061,7 +1075,8 @@ contract NFT_Collection_Resolver is
                 return abi.encode(addressToBytes(nft.ownerOf(toUint(domain))));
             }
             if (functionName == 4 && equals(key, "avatar") && toUint(domain) >= 0) {
-                return abi.encode(bytes(string(abi.encodePacked("eip155:1/erc721:",tokenContract,"/",domain))));
+                string memory nftaddr = toString(tokenContract);
+                return abi.encode(bytes(abi.encodePacked("eip155:1/erc721:",nftaddr,"/",domain)));
             }
             if (functionName == 4 && equals(key, "description") && toUint(domain) >= 0) {
                 return abi.encode(bytes(nft.name()));
