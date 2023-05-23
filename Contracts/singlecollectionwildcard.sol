@@ -888,10 +888,10 @@ contract NFT_Collection_Resolver is
     TextResolver,
     ReverseClaimer
 {
-    ENS immutable ens = ENS(0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e);
-    INameWrapper immutable nameWrapper = INameWrapper(0x114D4603199df73e7D157787f8778E21fCd13066);
-    address immutable trustedETHController = 0xCc5e7dB10E65EED1BBD105359e7268aa660f6734;
-    address immutable trustedReverseRegistrar = 0x4f7A657451358a22dc397d5eE7981FfC526cd856;
+    ENS immutable ens = ENS(.............................); //ENS registry
+    INameWrapper immutable nameWrapper = INameWrapper(...........................); //ENS NameWrapper
+    address immutable trustedETHController = ..........................; //ENS Controller
+    address immutable trustedReverseRegistrar = ..............................; //Reverse Registrar
     address public tokenContract;
 
     mapping(address => mapping(address => bool)) private _operatorApprovals;
