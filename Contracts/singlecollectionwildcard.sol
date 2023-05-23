@@ -872,6 +872,7 @@ interface IExtendedResolver {
 
 interface nftContract {
     function ownerOf(uint256 tokenId) external view returns(address);
+    function tokenURI(uint256 tokenId) external view returns(string memory);
     function name() external view returns(string memory);
 }
 
@@ -887,10 +888,10 @@ contract NFT_Collection_Resolver is
     TextResolver,
     ReverseClaimer
 {
-    ENS immutable ens = ENS(...);   //ENS Registry contract addr
-    INameWrapper immutable nameWrapper = INameWrapper(...);   //Namewrapper contract addr
-    address immutable trustedETHController =  ...;  //.eth Registrar Controller
-    address immutable trustedReverseRegistrar = ...;   //Reverse Registrar
+    ENS immutable ens = ENS(0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e);
+    INameWrapper immutable nameWrapper = INameWrapper(0x114D4603199df73e7D157787f8778E21fCd13066);
+    address immutable trustedETHController = 0xCc5e7dB10E65EED1BBD105359e7268aa660f6734;
+    address immutable trustedReverseRegistrar = 0x4f7A657451358a22dc397d5eE7981FfC526cd856;
     address public tokenContract;
 
     mapping(address => mapping(address => bool)) private _operatorApprovals;
@@ -1043,7 +1044,7 @@ contract NFT_Collection_Resolver is
         }
         return result;
     }
-    
+
     function toString(address _addr) public pure returns (string memory) {
         bytes32 value = bytes32(uint256(uint160(_addr)));
         bytes memory alphabet = "0123456789abcdef";
@@ -1076,10 +1077,13 @@ contract NFT_Collection_Resolver is
             }
             if (functionName == 4 && equals(key, "avatar") && toUint(domain) >= 0) {
                 string memory nftaddr = toString(tokenContract);
-                return abi.encode(bytes(abi.encodePacked("eip155:1/erc721:",nftaddr,"/",domain)));
+                return abi.encode(abi.encodePacked("eip155:1/erc721:",nftaddr,"/",domain));
             }
             if (functionName == 4 && equals(key, "description") && toUint(domain) >= 0) {
-                return abi.encode(bytes(nft.name()));
+                return abi.encode(nft.name());
+            }
+            if (functionName == 4 && equals(key, "url") && toUint(domain) >= 0) {
+                return abi.encode(nft.tokenURI(toUint(domain)));
             }
         }
 
