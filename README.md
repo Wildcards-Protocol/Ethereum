@@ -44,6 +44,7 @@ Instead, NFT project owners wishing to link their ENS names to collections on th
 
 The purpose of our Optimism resolver is to facilitate the Cross-Chain Interoperability Protocol (CCIP) in our back-end processes. Our CCIP gateway server directly forwards all queries it receives to the 'resolve' function of this Optimism resolver. The gateway server performs zero processing on its end, ensuring a completely transparent and trustless process for ENS resolution on the Optimism network.
 
+**NB: We will be gradually adding support for other EVM Chains**
 
 ## Resolving a Wildcard Domain
 
