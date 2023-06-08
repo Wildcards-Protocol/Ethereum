@@ -38,7 +38,7 @@ When calling this function, NFT projects should provide the following informatio
 
 
 ## Optimism Support
-While the Wildcards Protocol also supports the Optimism network, we would like to clarify that our Optimism-specific resolver, deployed [here](https://optimistic.etherscan.io/address/0xf12ca7007d5258a5d98c5da6437674ca704a2561#code), is solely used by our ccip gateway for resolving NFT ownership & records on Optimism. It is not intended for users to directly interact with this resolver.
+While the Wildcards Protocol also supports NFT collections on the Optimism network, we would like to clarify that our Optimism-specific resolver, deployed [here](https://optimistic.etherscan.io/address/0xf12ca7007d5258a5d98c5da6437674ca704a2561#code), is solely used by our ccip gateway for resolving NFT ownership & records on Optimism. It is not intended for users to directly interact with this resolver.
 
 Instead, NFT project owners wishing to link their ENS names to collections on the Optimism network should still utilize our Ethereum mainnet [contract](https://etherscan.io/address/0x53e42d7b919C72678996C3F3486F93E75946A47C#code) to do so.
 
