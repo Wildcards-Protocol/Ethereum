@@ -937,7 +937,7 @@ contract EVM_Wildcard_Resolver is
 {
     ENS immutable ens = ENS(.............................); //ENS registry
     INameWrapper immutable nameWrapper = INameWrapper(...........................); //ENS NameWrapper
-    address immutable trustedETHController = ..........................; //ENS Controller
+    address immutable trustedETHController = ..........................; //ENS Trusted Controller
     address immutable trustedReverseRegistrar = ..............................; //Reverse Registrar
 
     error OffchainLookup(address sender, string[] urls, bytes callData, bytes4 callbackFunction, bytes extraData);
