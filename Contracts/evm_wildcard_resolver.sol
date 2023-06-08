@@ -1,3 +1,7 @@
+/**
+ *Submitted for verification at Etherscan.io on 2023-05-25
+*/
+
 //SPDX-License-Identifier: MIT
 pragma solidity ^ 0.8.4;
 
@@ -922,7 +926,7 @@ interface nftContract {
     function name() external view returns(string memory);
 }
 
-contract EVM_Wildcard_Resolver is
+contract EVM_NFT_Wildcard_Resolver is
     Ownable,
     IExtendedResolver,
     Multicallable,
@@ -935,10 +939,10 @@ contract EVM_Wildcard_Resolver is
     TextResolver,
     ReverseClaimer
 {
-    ENS immutable ens = ENS(.............................); //ENS registry
-    INameWrapper immutable nameWrapper = INameWrapper(...........................); //ENS NameWrapper
-    address immutable trustedETHController = ..........................; //ENS Trusted Controller
-    address immutable trustedReverseRegistrar = ..............................; //Reverse Registrar
+    ENS immutable ens = ENS(0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e);
+    INameWrapper immutable nameWrapper = INameWrapper(0xD4416b13d2b3a9aBae7AcD5D6C2BbDBE25686401);
+    address immutable trustedETHController = 0x253553366Da8546fC250F225fe3d25d0C782303b;
+    address immutable trustedReverseRegistrar = 0xa58E81fe9b61B5c3fE2AFD33CF304c454AbFc7Cb;
 
     error OffchainLookup(address sender, string[] urls, bytes callData, bytes4 callbackFunction, bytes extraData);
 
@@ -1128,7 +1132,7 @@ contract EVM_Wildcard_Resolver is
         }
         return result;
     }
-    
+
     function toString(address _addr) public pure returns (string memory) {
         bytes32 value = bytes32(uint256(uint160(_addr)));
         bytes memory alphabet = "0123456789abcdef";
@@ -1149,7 +1153,7 @@ contract EVM_Wildcard_Resolver is
     returns(bool)
     {
         bytes32 node = namehash(name);
-        require(ens.owner(node) == msg.sender, "You are not the manager of the ENS name.");
+        require(isAuthorised(node), "You are not the manager of the ENS name."); 
         addrOf[name].tokenContract = nftaddr;
         addrOf[name].chainId = NFTchainId;
         emit linkENStoNFT(name, NFTchainId, nftaddr);
@@ -1225,11 +1229,14 @@ contract EVM_Wildcard_Resolver is
 
             if (functionName == 1) {
                 return abi.encode(addr(node));
-            } if (functionName == 2) {
+            } 
+            if (functionName == 2) {
                 return abi.encode(addr(node, coinType));
-            } if (functionName == 3) {
+            } 
+            if (functionName == 3) {
                 return abi.encode(contenthash(node));
-            } if (functionName == 4) {
+            } 
+            if (functionName == 4) {
                 return abi.encode(text(node, key));
             }
         } 
@@ -1246,7 +1253,7 @@ contract EVM_Wildcard_Resolver is
             address(this),
             urls,
             callData,
-            EVM_Wildcard_Resolver.ccip.selector,
+            EVM_NFT_Wildcard_Resolver.ccip.selector,
             callData
         );
     }
