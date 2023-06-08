@@ -12,15 +12,13 @@ This contract is a slight modification of the official ENS Public Resolver, whic
 
 ## Getting Started
 
-The first step for an NFT project is to link their ENS name to their NFT contract address while also providing the chain ID (chain ID for Ethereum is 1).
+Linking your ENS name to your NFT collection is a two-step process.
 
-This process is tailored to both NFT projects on Ethereum and those on other chains. 
+1. Set the Wildcards Protocol as your ENS Domain Resolver: Start by setting our smart contract address, 0x53e42d7b919C72678996C3F3486F93E75946A47C, as your ENS domain resolver. This can be done through the official ENS App.
 
-Currently we support ETH & Optimism with other EVM chains being added weekly.
+2. Link your ENS Name to your NFT Contract: Once you've set the Wildcards Protocol as your domain resolver, you can now link your ENS name to your NFT contract address while also providing the chain ID (chain ID for Ethereum is 1).
 
-### setLinkedContract Function
-
-NFT project owners will use the `setLinkedContract` function to link an ENS to their NFT contract address:
+You will use the setLinkedContract function in our contract to complete this process:
 
 ```solidity
 function setLinkedContract(string memory name, uint256 NFTchainId, address nftaddr)
