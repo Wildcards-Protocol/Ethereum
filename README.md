@@ -32,7 +32,8 @@ When calling this function, NFT projects should provide the following informatio
 - `NFTchainId`: This is the chain ID of the network where the NFT contract is deployed. For Ethereum, this will be 1.
 - `nftaddr`: This is the address of the NFT contract that you want to link with the ENS name. For example, "0x82f5ef9ddc3d231962ba57a9c2ebb307dc8d26c2".
 
-![link ens to nft](https://i.ibb.co/T8xbj4Q/Screen-Shot-2023-06-08-at-3-02-17-PM.png)
+<img src="https://i.ibb.co/T8xbj4Q/Screen-Shot-2023-06-08-at-3-02-17-PM.png" width="480" height="289">
+
 
 
 
